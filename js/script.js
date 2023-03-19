@@ -3,6 +3,11 @@ const { createApp } = Vue
 createApp({
     data() {
         return {
+            myContact: {
+                name: `Manuel`,
+                avatar: `img/avatar_io.jpg`
+            },
+
             contacts: [{
                     name: 'Michele',
                     avatar: 'img/avatar_1.jpg',
@@ -156,8 +161,17 @@ createApp({
                         }
                     ],
                 }
-            ]
+            ],
+
+            activeChatIndex: 0
+        }
+    },
+
+    methods: {
+        changeActiveChatIndex(index) {
+            this.activeChatIndex = index;
 
         }
     }
+
 }).mount('#app')

@@ -12,35 +12,97 @@
 
 <body>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
-    <div id="app">
-        <div id="container-left">
-            <div id="nav-left">
-                <div class="elements-left">
-
-                </div>
-                <div class="elements-right">
-                    <i class="fa-solid fa-circle-notch"></i>
-                    <i class="fa-solid fa-message"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
-            </div>
+    <div id="background">
+        <div id="background-top">
 
         </div>
+        <div id="app">
+            <!-- parte sinistra -->
+            <div id="container-left">
+                <!-- nav-bar left -->
+                <div id="nav-left">
+                    <div id="my-contact">
+                        <img :src=myContact.avatar class="avatar-img">
+                        <div>{{myContact.name}}</div>
+                    </div>
 
-        <div id="container-right">
-            <div id="nav-right">
-                <div class="elements-left">
+                    <div class="elements">
+                        <i class="fa-solid fa-circle-notch"></i>
+                        <i class="fa-solid fa-message"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                </div>
+                <!-- /nav-bar left -->
+                <div id="mute-notifications">
+                    <div id="container-mute-bell">
+                        <i class="fa-solid fa-bell-slash"></i>
+                    </div>
+                    <div id="container-mute-notifications-text">
+                        <div>Ricevi notifiche di nuovi messaggi</div>
+                        <a href="https://www.google.com/">Attiva notifiche desktop</a>
+                    </div>
+                </div>
+
+                <div id="container-search-chat">
+                    <button>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                    <input type="text" placeholder="Cerca o inizia nuova chat">
+                </div>
+
+                <div id="container-contacts">
+
+                    <div v-for="(contact, contactIndex) in contacts" @click="changeActiveChatIndex(contactIndex)"
+                        class="container-contact" :class="contactIndex == activeChatIndex ? `active` : ` `">
+                        <img :src=contact.avatar class="avatar-img">
+                        <div class="contact">{{contact.name}}</div>
+                    </div>
 
                 </div>
-                <div class="elements-right">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                    <i class="fa-solid fa-paperclip"></i>
-                    <i class="fa-solid fa-ellipsis-vertical"></i>
-                </div>
+
             </div>
+            <!-- /parte sinistra -->
 
+            <!------------------------------------------------------------------------>
+
+            <!-- parte desta -->
+            <div id="container-right">
+                <!-- nav-bar right -->
+                <div id="nav-right">
+
+                    <div id="current-contact">
+                        <img :src=contacts[activeChatIndex].avatar class="avatar-img">
+                        <div id="text-current-contact">
+                            <div>{{contacts[activeChatIndex].name}}</div>
+                            <div id="last-access">Ultimo accesso {{contacts[activeChatIndex].messages[0].date}}</div>
+                        </div>
+                    </div>
+
+                    <div class="elements">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <i class="fa-solid fa-paperclip"></i>
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+
+                </div>
+                <!-- /nav-bar right -->
+                <div id="container-messages">
+                    <div v-for="singleMessage in contacts[activeChatIndex].messages" class="message"
+                        :class="singleMessage.status">
+                        {{singleMessage.message}}
+                        <div id="message-time">{{singleMessage.date}}</div>
+                    </div>
+                </div>
+
+                <div id="bar-sent-message">
+                    <i class="fa-regular fa-face-smile"></i>
+                    <input type="text" placeholder="Scrivi un messaggio">
+                    <i class="fa-solid fa-microphone"></i>
+                </div>
+
+            </div>
         </div>
+        <!-- /parte destra -->
     </div>
 
     <script src="js/script.js"></script>
