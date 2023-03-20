@@ -163,7 +163,9 @@ createApp({
                 }
             ],
 
-            activeChatIndex: 0
+            activeChatIndex: 0,
+
+            userMessage: ``,
         }
     },
 
@@ -171,6 +173,31 @@ createApp({
         changeActiveChatIndex(index) {
             this.activeChatIndex = index;
 
+        },
+
+        addUserMessage() {
+            const newUserMessage = {
+                date: '10/01/2020 15:30:55',
+                message: this.userMessage,
+                status: 'sent'
+            };
+
+            this.contacts[this.activeChatIndex].messages.push(newUserMessage);
+
+            this.userMessage = ``;
+        },
+
+        addAnswer() {
+            const newAnswer = {
+                date: '10/01/2020 15:30:55',
+                message: `Ok`,
+                status: 'received'
+            };
+
+            setTimeout(() => {
+                this.contacts[this.activeChatIndex].messages.push(newAnswer);
+
+            }, 1000);
         }
     }
 

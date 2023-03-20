@@ -87,8 +87,7 @@
                 </div>
                 <!-- /nav-bar right -->
                 <div id="container-messages">
-                    <div v-for="singleMessage in contacts[activeChatIndex].messages" class="message"
-                        :class="singleMessage.status">
+                    <div v-for="singleMessage in contacts[activeChatIndex].messages" class="message" :class="singleMessage.status">
                         {{singleMessage.message}}
                         <div id="message-time">{{singleMessage.date}}</div>
                     </div>
@@ -96,7 +95,7 @@
 
                 <div id="bar-sent-message">
                     <i class="fa-regular fa-face-smile"></i>
-                    <input type="text" placeholder="Scrivi un messaggio">
+                    <input v-model="userMessage" @keyup.enter="addUserMessage(), addAnswer()" type="text" placeholder="Scrivi un messaggio">
                     <i class="fa-solid fa-microphone"></i>
                 </div>
 
