@@ -44,16 +44,15 @@
                 </div>
 
                 <div id="container-search-chat">
-                    <button>
+                    <button @click="searchContact()">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
-                    <input type="text" placeholder="Cerca o inizia nuova chat">
+                    <input v-model="contactEntered" @keyup.enter="searchContact()" type="text" placeholder="Cerca o inizia nuova chat">
                 </div>
 
                 <div id="container-contacts">
 
-                    <div v-for="(contact, contactIndex) in contacts" @click="changeActiveChatIndex(contactIndex)"
-                        class="container-contact" :class="contactIndex == activeChatIndex ? `active` : ` `">
+                    <div v-for="(contact, contactIndex) in contacts" v-show="contact.visible" @click="changeActiveChatIndex(contactIndex)" class="container-contact" :class="contactIndex == activeChatIndex ? `active` : ` `">
                         <img :src=contact.avatar class="avatar-img">
                         <div class="contact">{{contact.name}}</div>
                     </div>

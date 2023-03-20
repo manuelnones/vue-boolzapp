@@ -166,6 +166,8 @@ createApp({
             activeChatIndex: 0,
 
             userMessage: ``,
+
+            contactEntered: ``,
         }
     },
 
@@ -198,6 +200,17 @@ createApp({
                 this.contacts[this.activeChatIndex].messages.push(newAnswer);
 
             }, 1000);
+        },
+
+        searchContact() {
+            this.contacts.forEach(contact => {
+    
+                if(contact.name.toLowerCase().includes(this.contactEntered.toLowerCase())) {
+                    contact.visible = true;
+                } else {
+                    contact.visible = false;
+                }
+            });
         }
     }
 
